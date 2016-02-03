@@ -2,6 +2,7 @@ import falcon
 import json
 from json import JSONEncoder
 from pymongo import MongoClient
+import os
 
 
 class MongoEncoder(JSONEncoder):
@@ -51,7 +52,7 @@ class JSONTranslator(object):
         resp.body = json.dumps(resp.body, cls=MongoEncoder)
 
 
-class Tester(object):
+class Sciurus(object):
 
     def __init__(self, db=None):
         if not db:
@@ -77,6 +78,6 @@ class Tester(object):
 
 api = falcon.API(middleware=[JSONTranslator()])
 
-client = MongoClient()
+client = MongoClient(host=)
 db = client.squirrel
-api.add_route('/test', Tester(db))
+api.add_route('/test', Sciurus(db))
