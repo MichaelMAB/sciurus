@@ -1,6 +1,6 @@
 import os
 
-CONFIG = os.getenv('CONFIG', 'testing')
+CONFIG = os.getenv('CONFIG', 'production')
 
 
 def make_uri(db):
