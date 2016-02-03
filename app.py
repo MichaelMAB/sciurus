@@ -3,6 +3,14 @@ import json
 from json import JSONEncoder
 from pymongo import MongoClient
 import os
+from config import configs
+
+if os.path.exists('.env'):
+    print('Importing environment from .env...')
+    for line in open('.env'):
+        var = line.strip().split('=')
+        if len(var) == 2:
+            os.environ[var[0]] = var[1]
 
 
 class MongoEncoder(JSONEncoder):
@@ -25,8 +33,8 @@ class JSONTranslator(object):
         if req.content_length in (None, 0):
             # Nothing to do
             return
-        contentType = req.get_header('Content-Type')
-        if contentType == "application/json":
+        content_type = req.get_header('Content-Type')
+        if content_type == "application/json":
             body = req.stream.read()
             if not body:
                 raise falcon.HTTPBadRequest(
@@ -78,6 +86,11 @@ class Sciurus(object):
 
 api = falcon.API(middleware=[JSONTranslator()])
 
-client = MongoClient(host=)
-db = client.squirrel
+app_config = configs[os.getenv('CONFIG', 'default')]
+
+client = MongoClient(host=app_config.HOST)
+db = client[app_config.DB]
+
 api.add_route('/test', Sciurus(db))
+
+print "Running App"

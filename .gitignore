@@ -4,6 +4,9 @@ __pycache__/
 
 .DS_Store
 
+# Environment and Config settings
+.env
+
 # C extensions
 *.so
 
