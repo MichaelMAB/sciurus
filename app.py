@@ -73,7 +73,7 @@ class Sciurus(object):
         result = self.items.insert_one(obj)
         resp.status = falcon.HTTP_200  # This is the default status
         resp.body = {
-            'result': 'You did it. Here is the id:{0}'.format(result),
+            'result': 'You did it! Here is the id:{0}'.format(result),
         }
 
 api = falcon.API(middleware=[JSONTranslator()])
