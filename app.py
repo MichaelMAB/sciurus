@@ -46,7 +46,7 @@ class AuthMiddleware(object):
                                           scheme='Token; UUID')
 
     def _token_is_valid(self, token, project):
-        if token == 'Michael':
+        if token == 'Michael' and project == "test":
             return True  # Suuuuuure it's valid...
         else:
             return False
