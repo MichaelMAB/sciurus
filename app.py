@@ -46,7 +46,10 @@ class AuthMiddleware(object):
                                           scheme='Token; UUID')
 
     def _token_is_valid(self, token, project):
-        return True  # Suuuuuure it's valid...
+        if token == 'Michael':
+            return True  # Suuuuuure it's valid...
+        else:
+            return False
 
 
 class JSONTranslator(object):
