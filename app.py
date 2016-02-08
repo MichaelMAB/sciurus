@@ -110,7 +110,10 @@ class Sciurus(object):
             'result': 'You did it! Here is the id:{0}'.format(result),
         }
 
-api = falcon.API(middleware=[JSONTranslator()])
+api = falcon.API(middleware=[
+    JSONTranslator(),
+    AuthMiddleware(),
+])
 
 app_config = configs[os.getenv('CONFIG', 'default')]
 
