@@ -22,6 +22,9 @@ class MongoEncoder(JSONEncoder):
         else:
             return JSONEncoder.default(obj, **kwargs)
 
+TOKENHEAD = os.environ.get('TOKEN_HEADER')
+PROJECTHEAD = os.environ.get('PROJECT_HEADER')
+
 
 # Adds Authentification for GET and POST requests
 class AuthMiddleware(object):
@@ -49,7 +52,7 @@ class AuthMiddleware(object):
 
     # Checks X-Auth-Token and X-Project-ID values
     def _token_is_valid(self, token, project):
-        if token == 'Michael' and project == "test":
+        if token == TOKENHEAD and project == PROJECTHEAD:  # Can set to env variables
             return True  # Suuuuuure it's valid...
         else:
             return False
