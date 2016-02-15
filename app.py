@@ -119,6 +119,11 @@ class Sciurus(object):
             'result': 'You did it! Here is the id:{0}'.format(result),
         }
 
+    def on_delete(self, req, resp, **kwargs):
+        """Handles Delete requests"""
+        resp.status = falcon.HTTP_200
+
+
 api = falcon.API(middleware=[
     JSONTranslator(),
     AuthMiddleware(),
